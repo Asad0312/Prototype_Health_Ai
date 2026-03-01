@@ -1,0 +1,15 @@
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background Shield -->
+  <path d="M100 20L40 50V100C40 140 60 180 100 190C140 180 160 140 160 100V50L100 20Z" fill="#2A7A8C"/>
+  
+  <!-- Heart Beat Line -->
+  <path d="M70 110L90 90L105 115L125 95L140 120" stroke="white" stroke-width="6" stroke-linecap="round" fill="none"/>
+  
+  <!-- Medical Cross -->
+  <circle cx="100" cy="110" r="25" fill="white" opacity="0.2"/>
+  <path d="M100 95V125M85 110H115" stroke="white" stroke-width="6" stroke-linecap="round"/>
+  
+  <!-- Text -->
+  <text x="100" y="170" text-anchor="middle" fill="white" font-family="Arial" font-weight="bold" font-size="24">HealthGuard</text>
+  <text x="100" y="195" text-anchor="middle" fill="#F4A261" font-family="Arial" font-weight="bold" font-size="18">AI</text>
+</svg>
