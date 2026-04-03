@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { authService } from '../services/authService.js';
 import { Activity } from 'lucide-react';
 
 const Login = () => {
@@ -10,15 +11,28 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     
-    const user = login(email, password);
+    // First try backend login
+    try {
+      const response = await authService.login(email, password);
+      if (response.user) {
+        localStorage.setItem('healthguard_user', JSON.stringify(response.user));
+        navigate('/dashboard');
+        return;
+      }
+    } catch (err) {
+      console.log('Backend login failed, using mock');
+    }
     
+    // Fallback to mock login
+    const user = login(email, password);
     if (user) {
+      localStorage.setItem('healthguard_user', JSON.stringify(user));
       navigate('/dashboard');
     } else {
-      setError('Invalid email or password. Try: sarah@example.com');
+      setError('Invalid credentials. Demo: sarah@example.com / any password');
     }
   };
 

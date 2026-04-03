@@ -34,7 +34,7 @@ const Dashboard = () => {
   const latestHbA1c = healthMetrics.hba1c[healthMetrics.hba1c.length - 1] || { value: 5.5 };
 
   return (
-    <div className="dashboard-container">
+<div className="dashboard-container glass-effect fade-in-up">
       {/* Header Section */}
       <div className="dashboard-header">
         <div>

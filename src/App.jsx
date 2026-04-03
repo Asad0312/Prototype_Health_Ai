@@ -17,7 +17,8 @@ import Profile from './pages/Profile';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Appointments from './pages/Appointments';        // ✅ New
-import PaymentMethods from './pages/PaymentMethods';    // ✅ New
+import PaymentMethods from './pages/PaymentMethods';
+import LandingPage from './pages/LandingPage';    // ✅ New
 
 // Protected Route Component
 const ProtectedRoute = ({ children }) => {
@@ -46,7 +47,7 @@ const Layout = ({ children }) => {
       <Navbar user={user} />
       <div className={`main-content ${sidebarOpen ? 'sidebar-open' : 'sidebar-closed'}`}>
         <Sidebar />
-        <main className="content">
+        <main className="content fade-in-up">
           {children}
         </main>
       </div>
@@ -130,7 +131,7 @@ function App() {
           } />
           
           {/* Default Route */}
-          <Route path="/" element={<Navigate to="/dashboard" />} />
+          <Route path="/" element={<LandingPage />} />
         </Routes>
       </Router>
     </AuthProvider>

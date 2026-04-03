@@ -1,8 +1,80 @@
-/* Dashboard Container */
+@tailwind utilities;
+
+/* Enhanced Dashboard Responsive */
 .dashboard-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
+  @apply container mx-auto p-6 sm:p-8 lg:p-12 space-y-8;
+}
+
+.dashboard-header {
+  @apply flex flex-col lg:flex-row lg:items-center gap-4 lg:gap-8 mb-8 p-6 rounded-2xl bg-gradient-to-r from-blue-50 to-teal-50;
+}
+
+.dashboard-header h1 {
+  @apply text-3xl md:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-gray-800 to-slate-700 bg-clip-text text-transparent mb-2;
+}
+
+.member-since {
+  @apply text-slate-500 text-lg font-medium;
+}
+
+.add-data-btn {
+  @apply btn-modern btn-primary-modern self-start lg:self-end px-8 py-4 text-base font-bold shadow-xl;
+}
+
+.metrics-grid {
+  @apply responsive-grid gap-6 lg:gap-8;
+}
+
+.charts-grid {
+  @apply grid grid-cols-1 lg:grid-cols-2 gap-8;
+}
+
+.chart-card {
+  @apply glass-container card-hover h-96 p-8;
+}
+
+.chart-card h3 {
+  @apply text-xl font-bold text-slate-800 mb-6;
+}
+
+.medication-item {
+  @apply glass-container card-hover p-6 flex flex-col lg:flex-row lg:items-center gap-4;
+}
+
+.health-score-section {
+  @apply grid place-items-center py-12;
+}
+
+.alerts-section {
+  @apply glass-container rounded-3xl p-8 mb-12;
+}
+
+.alerts-section h2 {
+  @apply text-2xl font-bold mb-6 text-slate-800;
+}
+
+.medications-section h2 {
+  @apply text-2xl font-bold mb-8 text-slate-800;
+}
+
+/* Loading */
+.loading-container {
+  @apply min-h-[60vh] flex flex-col items-center justify-center gap-4;
+}
+
+.loading-container div {
+  @apply text-2xl text-slate-500 animate-pulse;
+}
+
+/* Mobile Optimizations */
+@media (max-width: 640px) {
+  .add-data-btn {
+    @apply w-full justify-center;
+  }
+  
+  .medication-adherence {
+    @apply self-end mt-2;
+  }
 }
 
 /* Header Section */
@@ -69,17 +141,28 @@
 /* Metrics Grid */
 .metrics-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
-  margin-bottom: 32px;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 1rem;
+}
+@media (min-width: 640px) {
+  .metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 1024px) {
+  .metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 1280px) {
+  .metrics-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 
 /* Charts Grid */
 .charts-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
-  margin-bottom: 32px;
+  @apply grid grid-cols-1 lg:grid-cols-2 gap-8;
 }
 
 .chart-card {
@@ -165,34 +248,7 @@
   }
 }
 
-@media (max-width: 768px) {
-  .dashboard-container {
-    padding: 16px;
-  }
-  
-  .dashboard-header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  
-  .metrics-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .add-data-btn {
-    width: 100%;
-  }
-  
-  .medication-item {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
-  }
-  
-  .medication-adherence {
-    align-self: flex-end;
-  }
-}
+
 
 /* Dark Mode Support */
 @media (prefers-color-scheme: dark) {
