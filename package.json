@@ -3,8 +3,10 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "scripts": {
+"scripts": {
     "dev": "vite",
+    "dev:backend": "cd backend && npm run dev",
+    "dev:full": "npm run dev:backend & vite",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"

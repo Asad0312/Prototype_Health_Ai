@@ -1,9 +1,11 @@
+import { api } from './api.js';
+
 export const authService = {
   login: async (email, password) => {
-    // Mock login
-    return { user: { id: 1, name: 'Sarah Johnson', email } };
+    const response = await api.post('/auth/login', { email, password });
+    return response;
   },
   logout: () => {
-    // Mock logout
+    localStorage.removeItem('user');
   }
 };

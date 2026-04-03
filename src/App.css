@@ -1,29 +1,78 @@
+/* Modern Responsive App Layout */
+@tailwind utilities;
+@tailwind components;
+
+@layer components {
+  .glass-container {
+    @apply bg-gradient-to-br from-white/90 to-white/70 backdrop-blur-xl border border-white/50 shadow-2xl rounded-3xl p-8 md:p-12 transition-all duration-500 hover:shadow-3xl;
+  }
+  .responsive-grid {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8;
+  }
+}
+
 .app {
-  min-height: 100vh;
+  @apply min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/50 to-indigo-100;
 }
 
 .main-content {
-  display: flex;
-  min-height: calc(100vh - 60px);
+  @apply min-h-[calc(100vh-4rem)] flex flex-col lg:flex-row overflow-hidden;
 }
 
 .content {
-  flex: 1;
-  padding: 24px;
-  background-color: #F5F7FA;
-  margin-left: 250px;
-  transition: margin-left 0.3s ease;
+  @apply flex-1 p-4 sm:p-6 lg:p-8 lg:ml-64 transition-all duration-500 ease-in-out overflow-x-hidden;
 }
 
-/* Login and Register pages have no sidebar */
-.login-page .content,
-.register-page .content {
-  margin-left: 0;
+.sidebar-open.content {
+  @apply lg:ml-64;
 }
 
-@media (max-width: 768px) {
-  .content {
-    margin-left: 0;
-    padding: 16px;
+.sidebar-closed.content {
+  @apply lg:ml-20;
+}
+
+/* Mobile First Animations */
+.fade-in-up {
+  animation: fadeInUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+@keyframes fadeInUp {
+  0% { opacity: 0; transform: translateY(2rem); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Healthcare Palette Utilities */
+.text-primary-gradient {
+  background: linear-gradient(135deg, #2A7A8C 0%, #4A90E2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.btn-modern {
+  @apply inline-flex items-center gap-3 px-6 py-3 rounded-2xl font-semibold text-sm shadow-lg transform transition-all duration-300 hover:-translate-y-1 active:translate-y-0;
+}
+
+.btn-primary-modern {
+  @apply bg-gradient-to-r from-blue-500 via-teal-500 to-emerald-500 text-white shadow-xl hover:shadow-2xl;
+}
+
+.btn-secondary-modern {
+  @apply bg-white/80 border-2 border-blue-200 text-blue-700 hover:bg-blue-50 shadow-lg;
+}
+
+/* Responsive Typography */
+@responsive {
+  .text-hero {
+    @apply text-4xl md:text-5xl lg:text-6xl font-bold leading-tight;
   }
+  
+  .text-xl-responsive {
+    @apply text-lg md:text-xl lg:text-2xl;
+  }
+}
+
+/* Card Hover Effects */
+.card-hover {
+  @apply transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl active:scale-[0.98];
 }

@@ -1,21 +1,46 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
+import { api } from '../services/api.js';
 import { Activity } from 'lucide-react';
 import './Register.css';
 
 const Register = () => {
   const navigate = useNavigate();
+  const { register } = useAuth();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     password: '',
     confirmPassword: ''
   });
+  const [error, setError] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // For prototype, just navigate to dashboard
-    navigate('/dashboard');
+    if (formData.password !== formData.confirmPassword) {
+      setError('Passwords do not match');
+      return;
+    }
+    
+    try {
+      // Try backend register first
+      try {
+        const response = await api.post('/register/register', formData);
+        localStorage.setItem('healthguard_user', JSON.stringify(response.user));
+        navigate('/dashboard');
+        return;
+      } catch (err) {
+        console.log('Backend register failed, using mock');
+      }
+      
+      // Fallback mock register
+      const user = register(formData);
+      localStorage.setItem('healthguard_user', JSON.stringify(user));
+      navigate('/dashboard');
+    } catch (err) {
+      setError('Registration failed. Please try again.');
+    }
   };
 
   return (
@@ -29,6 +54,12 @@ const Register = () => {
           <h1>Create Account</h1>
           <p>Start your journey to better health</p>
         </div>
+
+        {error && (
+          <div className="error-message">
+            {error}
+          </div>
+        )}
 
         <form onSubmit={handleSubmit} className="register-form">
           <div className="form-group">
@@ -101,3 +132,4 @@ const Register = () => {
 };
 
 export default Register;
+
