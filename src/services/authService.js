@@ -1,9 +1,13 @@
 export const authService = {
   login: async (email, password) => {
-    // Mock login
-    return { user: { id: 1, name: 'Sarah Johnson', email } };
+    const response = await api.post('/auth/login', { email, password });
+    return response.data;
+  },
+  register: async (name, email, password) => {
+    const response = await api.post('/register/register', { name, email, password });
+    return response.data;
   },
   logout: () => {
-    // Mock logout
+    localStorage.removeItem('healthguard_user');
   }
 };
