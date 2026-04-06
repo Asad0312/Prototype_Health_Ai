@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Activity } from 'lucide-react';
-import { authService } from '../../services/authService.js';
+import { authService } from '../services/authService.js';
 import './Register.css';
 
 const Register = () => {
@@ -27,7 +27,8 @@ const Register = () => {
     }
 
     try {
-      const { user } = await authService.register(formData.name, formData.email, formData.password);
+      const response = await authService.register(formData.name, formData.email, formData.password);
+      const { user } = response;
       localStorage.setItem('healthguard_user', JSON.stringify(user));
       navigate('/dashboard');
     } catch (err) {

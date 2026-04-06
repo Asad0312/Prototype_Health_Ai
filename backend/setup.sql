@@ -12,5 +12,6 @@ CREATE TABLE IF NOT EXISTS users (
 
 -- Demo user
 INSERT IGNORE INTO users (name, email, password_hash) VALUES 
-('Sarah Johnson', 'sarah@example.com', '$2b$10$K.ExampleHashForDemo');
+('Sarah Johnson', 'sarah@example.com', '$2b$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi');
+('Ali', 'Ali@gmail.com', '1234');
 

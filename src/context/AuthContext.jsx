@@ -1,4 +1,5 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
+import { authService } from '../services/authService.js';
 
 const AuthContext = createContext();
 
@@ -22,99 +23,12 @@ export const AuthProvider = ({ children }) => {
     setLoading(false);
   }, []);
 
-  const login = (email, password) => {
-    const users = [
-      {
-        id: 1,
-        name: 'Sarah Johnson',
-        email: 'sarah@example.com',
-        age: 52,
-        healthScore: 78,
-        joinDate: '2024-01-01',
-        healthMetrics: {
-          bloodPressure: [
-            { date: '2023-07', systolic: 128, diastolic: 82 },
-            { date: '2023-08', systolic: 132, diastolic: 85 },
-            { date: '2023-09', systolic: 135, diastolic: 87 },
-            { date: '2023-10', systolic: 138, diastolic: 89 },
-            { date: '2023-11', systolic: 142, diastolic: 91 },
-            { date: '2023-12', systolic: 145, diastolic: 93 },
-            { date: '2024-01', systolic: 148, diastolic: 94 }
-          ],
-          hba1c: [
-            { date: '2023-07', value: 6.1 },
-            { date: '2023-08', value: 6.2 },
-            { date: '2023-09', value: 6.3 },
-            { date: '2023-10', value: 6.4 },
-            { date: '2023-11', value: 6.5 },
-            { date: '2023-12', value: 6.6 },
-            { date: '2024-01', value: 6.7 }
-          ],
-          weight: [
-            { date: '2023-07', value: 165 },
-            { date: '2023-08', value: 164 },
-            { date: '2023-09', value: 164 },
-            { date: '2023-10', value: 163 },
-            { date: '2023-11', value: 162 },
-            { date: '2023-12', value: 162 },
-            { date: '2024-01', value: 161 }
-          ],
-          heartRate: [
-            { date: '2024-01', value: 72 }
-          ]
-        },
-        alerts: [
-          {
-            id: 1,
-            type: 'warning',
-            title: 'Medication Interaction Detected',
-            message: 'Warning: Potassium supplements can interact with Lisinopril. Please consult your doctor.',
-            date: '2024-01-15',
-            read: false
-          }
-        ],
-        medications: [
-          {
-            id: 1,
-            name: 'Lisinopril',
-            dosage: '10mg',
-            frequency: 'Once daily',
-            time: '08:00 AM',
-            adherence: 95
-          },
-          {
-            id: 2,
-            name: 'Metformin',
-            dosage: '500mg',
-            frequency: 'Twice daily',
-            time: '08:00 AM, 08:00 PM',
-            adherence: 88
-          }
-        ]
-      },
-      {
-        id: 2,
-        name: 'John Doe',
-        email: 'john@example.com',
-        age: 45,
-        healthScore: 85,
-        joinDate: '2024-02-01',
-        healthMetrics: {
-          bloodPressure: [{ date: '2024-02', systolic: 118, diastolic: 76 }],
-          hba1c: [{ date: '2024-02', value: 5.2 }],
-          weight: [{ date: '2024-02', value: 170 }],
-          heartRate: [{ date: '2024-02', value: 68 }]
-        },
-        alerts: [],
-        medications: []
-      }
-    ];
-
-    const foundUser = users.find(u => u.email === email);
-    if (foundUser) {
-      setUser(foundUser);
-      localStorage.setItem('healthguard_user', JSON.stringify(foundUser));
-      return foundUser;
+  const login = async (email, password) => {
+    const { user } = await authService.login(email, password);
+    if (user) {
+      setUser(user);
+      localStorage.setItem('healthguard_user', JSON.stringify(user));
+      return user;
     }
     return null;
   };

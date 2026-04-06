@@ -2,6 +2,8 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import registerRouter from './routes/register.js';
+import authRouter from './routes/auth.js';
+import healthRouter from './routes/health.js';
 
 dotenv.config();
 
@@ -14,6 +16,8 @@ app.use(cors({
 app.use(express.json());
 
 app.use('/api/register', registerRouter);
+app.use('/api/auth', authRouter);
+app.use('/api/health', healthRouter);
 
 app.get('/api/health', (req, res) => res.json({ message: 'Backend running' }));
 

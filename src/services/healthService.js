@@ -1,15 +1,14 @@
-import { healthMetrics, alerts, medications } from '../data/dummyHealthData';
+import { api } from './api.js';
 
 export const healthService = {
-  getDashboardData: async () => {
-    return {
-      metrics: healthMetrics,
-      alerts: alerts,
-      medications: medications
-    };
+  getDashboardData: async (userId) => {
+    const response = await api.get(`/health/dashboard?userId=${userId}`);
+    return response;
   },
   uploadDocument: async (file) => {
-    console.log('Uploading:', file.name);
-    return { success: true };
+    const formData = new FormData();
+    formData.append('file', file);
+    // Future: POST /api/upload
+    return { success: true, url: URL.createObjectURL(file) };
   }
 };

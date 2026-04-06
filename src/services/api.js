@@ -1,11 +1,24 @@
-// Mock API service for prototype
+const API_BASE = 'http://localhost:5000/api';
+
 export const api = {
-  get: async (url) => {
-    console.log(`GET request to ${url}`);
-    return { data: {} };
+  get: async (endpoint) => {
+    const response = await fetch(`${API_BASE}${endpoint}`);
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.error || `HTTP ${response.status}`);
+    }
+    return response.json();
   },
-  post: async (url, data) => {
-    console.log(`POST request to ${url}`, data);
-    return { data: {} };
+  post: async (endpoint, data) => {
+    const response = await fetch(`${API_BASE}${endpoint}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.error || `HTTP ${response.status}`);
+    }
+    return response.json();
   }
 };

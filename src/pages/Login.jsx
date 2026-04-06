@@ -10,15 +10,16 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    const user = login(email, password);
-    
-    if (user) {
+    setError('');
+
+    try {
+      const { user } = await authService.login(email, password);
+      localStorage.setItem('healthguard_user', JSON.stringify(user));
       navigate('/dashboard');
-    } else {
-      setError('Invalid email or password. Try: sarah@example.com');
+    } catch (err) {
+      setError(err.error || 'Invalid credentials');
     }
   };
 
