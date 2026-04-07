@@ -9,6 +9,7 @@ import Footer from './components/layout/Footer';
 
 // Pages
 import Dashboard from './pages/Dashboard';
+import LandingPage from './pages/LandingPage';
 import UploadDocuments from './pages/UploadDocuments';
 import ShareRecords from './pages/ShareRecords';
 import MedicationTracker from './pages/MedicationTracker';
@@ -16,8 +17,8 @@ import WearableIntegration from './pages/WearableIntegration';
 import Profile from './pages/Profile';
 import Login from './pages/Login';
 import Register from './pages/Register';
-import Appointments from './pages/Appointments';        // ✅ New
-import PaymentMethods from './pages/PaymentMethods';    // ✅ New
+import Appointments from './pages/Appointments';
+import PaymentMethods from './pages/PaymentMethods';
 
 // Protected Route Component
 const ProtectedRoute = ({ children }) => {
@@ -46,7 +47,7 @@ const Layout = ({ children }) => {
       <Navbar user={user} />
       <div className={`main-content ${sidebarOpen ? 'sidebar-open' : 'sidebar-closed'}`}>
         <Sidebar />
-        <main className="content">
+        <main className="content fade-in-up">
           {children}
         </main>
       </div>
@@ -61,6 +62,7 @@ function App() {
       <Router>
         <Routes>
           {/* Public Routes */}
+          <Route path="/" element={<LandingPage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           
@@ -105,7 +107,7 @@ function App() {
             </ProtectedRoute>
           } />
           
-          <Route path="/appointments" element={               // ✅ New
+          <Route path="/appointments" element={
             <ProtectedRoute>
               <Layout>
                 <Appointments />
@@ -113,7 +115,7 @@ function App() {
             </ProtectedRoute>
           } />
           
-          <Route path="/payments" element={                   // ✅ New
+          <Route path="/payments" element={
             <ProtectedRoute>
               <Layout>
                 <PaymentMethods />
@@ -128,9 +130,6 @@ function App() {
               </Layout>
             </ProtectedRoute>
           } />
-          
-          {/* Default Route */}
-          <Route path="/" element={<Navigate to="/dashboard" />} />
         </Routes>
       </Router>
     </AuthProvider>

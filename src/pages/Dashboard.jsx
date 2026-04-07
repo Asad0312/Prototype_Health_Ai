@@ -18,20 +18,40 @@ const Dashboard = () => {
     );
   }
 
-  // Default data for new users
+// Rich demo data
   const healthMetrics = user.healthMetrics || {
-    bloodPressure: [{ date: '2024-01', systolic: 120, diastolic: 80 }],
-    hba1c: [{ date: '2024-01', value: 5.5 }],
-    weight: [{ date: '2024-01', value: 150 }],
-    heartRate: [{ date: '2024-01', value: 72 }]
+    bloodPressure: [
+      { date: '2024-09', systolic: 122, diastolic: 78 },
+      { date: '2024-10', systolic: 118, diastolic: 76 },
+      { date: '2024-11', systolic: 125, diastolic: 80 }
+    ],
+    hba1c: [
+      { date: '2024-09', value: 5.7 },
+      { date: '2024-10', value: 5.6 },
+      { date: '2024-11', value: 5.8 }
+    ],
+    weight: [
+      { date: '2024-09', value: 152 },
+      { date: '2024-10', value: 150 },
+      { date: '2024-11', value: 148 }
+    ],
+    heartRate: [
+      { date: '2024-09', value: 74 },
+      { date: '2024-10', value: 72 },
+      { date: '2024-11', value: 70 }
+    ]
   };
 
-  const alerts = user.alerts || [];
-  const medications = user.medications || [];
+  const alerts = user.alerts || [
+    { id: 1, message: 'Blood pressure slightly elevated - monitor daily', type: 'warning', date: '2024-11-10' }
+  ];
 
-  const latestBP = healthMetrics.bloodPressure[healthMetrics.bloodPressure.length - 1] || 
-                   { systolic: 120, diastolic: 80 };
-  const latestHbA1c = healthMetrics.hba1c[healthMetrics.hba1c.length - 1] || { value: 5.5 };
+  const medications = user.medications || [
+    { id: 1, name: 'Aspirin', dosage: '81mg', frequency: 'Daily', time: '8AM', adherence: 95 }
+  ];
+
+  const latestBP = healthMetrics.bloodPressure[healthMetrics.bloodPressure.length - 1] || { systolic: 125, diastolic: 80 };
+  const latestHbA1c = healthMetrics.hba1c[healthMetrics.hba1c.length - 1] || { value: 5.8 };
 
   return (
     <div className="dashboard-container">

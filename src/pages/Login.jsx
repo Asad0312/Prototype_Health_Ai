@@ -10,27 +10,41 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
-  const handleSubmit = async (e) => {
+const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
-
-    try {
-      const { user } = await authService.login(email, password);
-      localStorage.setItem('healthguard_user', JSON.stringify(user));
-      navigate('/dashboard');
-    } catch (err) {
-      setError(err.error || 'Invalid credentials');
-    }
+    
+    // Demo fallback for manual login
+    const user = {
+      name: email.split('@')[0],
+      email,
+      healthScore: 90,
+      healthMetrics: {},
+      alerts: [],
+      medications: []
+    };
+    localStorage.setItem('healthguard_user', JSON.stringify(user));
+    navigate('/dashboard');
   };
 
   // Demo login
-  const demoLogin = (demoEmail) => {
-    setEmail(demoEmail);
-    setPassword('123');
-    setTimeout(() => {
-      const user = login(demoEmail, '123');
-      if (user) navigate('/dashboard');
-    }, 100);
+const demoLogin = (demoEmail) => {
+    const users = {
+      'sarah@example.com': { name: 'Sarah Johnson', email: demoEmail, healthScore: 92, joinDate: '2024-01-15', healthMetrics: {}, alerts: [], medications: [] },
+      'john@example.com': { name: 'John Doe', email: demoEmail, healthScore: 87, joinDate: '2024-02-01', healthMetrics: {}, alerts: [], medications: [] }
+    };
+localStorage.setItem('healthguard_user', JSON.stringify({
+  ...users[demoEmail],
+  healthMetrics: {
+    bloodPressure: [{ date: '2024-11', systolic: 125, diastolic: 80 }],
+    hba1c: [{ date: '2024-11', value: 5.8 }],
+    weight: [{ date: '2024-11', value: 148 }],
+    heartRate: [{ date: '2024-11', value: 70 }]
+  },
+  alerts: [{ id: 1, message: 'BP elevated - monitor daily', type: 'warning' }],
+  medications: [{ id: 1, name: 'Aspirin', dosage: '81mg', frequency: 'Daily', adherence: 95 }]
+}));
+    navigate('/dashboard');
   };
 
   return (
