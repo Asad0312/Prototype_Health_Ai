@@ -23,7 +23,7 @@ const Sidebar = () => {
     { path: '/upload', icon: Upload, label: 'Upload Documents' },
     { path: '/share', icon: Share2, label: 'Share Records' },
     { path: '/medications', icon: Pill, label: 'Medications' },
-    { path: '/wearables', icon: Watch, label: 'Wearables' },
+// { path: '/wearables', icon: Watch, label: 'Wearables' },
     { path: '/appointments', icon: Calendar, label: 'Appointments' },      // ✅ New
     { path: '/payments', icon: CreditCard, label: 'Payments' },            // ✅ New
     { path: '/profile', icon: User, label: 'Profile' },

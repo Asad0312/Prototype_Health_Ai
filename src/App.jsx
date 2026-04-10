@@ -13,7 +13,7 @@ import LandingPage from './pages/LandingPage';
 import UploadDocuments from './pages/UploadDocuments';
 import ShareRecords from './pages/ShareRecords';
 import MedicationTracker from './pages/MedicationTracker';
-import WearableIntegration from './pages/WearableIntegration';
+// import WearableIntegration from './pages/WearableIntegration';
 import Profile from './pages/Profile';
 import Login from './pages/Login';
 import Register from './pages/Register';
@@ -99,13 +99,7 @@ function App() {
             </ProtectedRoute>
           } />
           
-          <Route path="/wearables" element={
-            <ProtectedRoute>
-              <Layout>
-                <WearableIntegration />
-              </Layout>
-            </ProtectedRoute>
-          } />
+// Removed WearableIntegration route
           
           <Route path="/appointments" element={
             <ProtectedRoute>

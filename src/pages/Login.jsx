@@ -29,8 +29,8 @@ const handleSubmit = async (e) => {
 
   // Demo login
 const demoLogin = (demoEmail) => {
-    const users = {
-      'sarah@example.com': { name: 'Sarah Johnson', email: demoEmail, healthScore: 92, joinDate: '2024-01-15', healthMetrics: {}, alerts: [], medications: [] },
+const users = {
+      'sarah@example.com': { name: 'Sarah Johnson', email: demoEmail, healthScore: 65, joinDate: '2024-01-15', healthMetrics: {}, alerts: [], medications: [] },
       'john@example.com': { name: 'John Doe', email: demoEmail, healthScore: 87, joinDate: '2024-02-01', healthMetrics: {}, alerts: [], medications: [] }
     };
 localStorage.setItem('healthguard_user', JSON.stringify({

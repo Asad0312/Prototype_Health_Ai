@@ -94,7 +94,7 @@ const Dashboard = () => {
 
       {/* Health Score */}
       <div className="health-score-section">
-        <HealthScoreCard score={user.healthScore || 100} />
+<HealthScoreCard score={user.healthScore || 65} />
       </div>
 
       {/* Metrics Grid */}
@@ -113,8 +113,8 @@ const Dashboard = () => {
           value={latestHbA1c.value}
           unit="%"
           icon={<Droplets size={24} />}
-          color="#F4A261"
-          trend={+9.8}
+color="#ED6A5E"
+          trend={+0.2}
         />
         
         <HealthMetricCard
